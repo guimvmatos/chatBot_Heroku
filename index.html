@@ -7,13 +7,15 @@
             <h1>chatbot from heroku!</h1>
 <div id="webchat"/>
 <script src="https://cdn.jsdelivr.net/npm/rasa-webchat/lib/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/rasa-webchat@1.5.0/lib/index.min.js"></script>
 
 
 <script>
   WebChat.default.init({
     selector: "#webchat",
     customData: {"language": "en"},
-    socketUrl: "https://gothan.herokuapp.com/",
+    /*socketUrl: "https://gothan.herokuapp.com/",*/
+    socketUrl: "http://localhost:5005",
     socketPath: "/socket.io/",
     title: "UNIFEB",
     subtitle: "GOTHAN",

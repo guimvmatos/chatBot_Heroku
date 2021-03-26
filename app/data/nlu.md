@@ -5,8 +5,6 @@
 - good morning
 - good evening
 - hey there
-- oi
-- ola
 
 ## intent:goodbye
 - bye
@@ -44,7 +42,6 @@
 - very sad
 - unhappy
 - bad
-- to mal para caralho
 - very bad
 - awful
 - terrible
