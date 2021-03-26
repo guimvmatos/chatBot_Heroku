@@ -18,6 +18,8 @@ For example:
 
 `curl https://<your Heroku application name>.herokuapp.com/model/parse -d '{"text":"hello"}'`
 
+curl https://gothan.herokuapp.com/model/parse -d '{"text":"hello"}'
+
 ## How to change the model
 
 Once you've deployed and tested your NLU server, you can then clone it to your machine and make changes in NLU model.
