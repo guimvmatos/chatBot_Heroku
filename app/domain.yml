@@ -6,26 +6,93 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - boleto
+  - diploma
+  - inform
+  - thankyou
+  - out_of_scope
+
+entities:
+  - nome
+  - ra
+  - have_email
+  - email
+  - telefone
+
+slots:
+  nome:
+    type: unfeaturized
+  ra:
+    type: unfeaturized
+  have_email:
+    type: unfeaturized
+  email:
+    type: unfeaturized
+  telefone:
+    type: unfeaturized
 
 responses:
-  utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
 
   utter_goodbye:
   - text: "Bye"
 
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  - text: "Batman, Gothan precisa de ajuda!"
+
+  utter_introduce_myself:
+  - text: "Olá, eu sou Gothan, assistente virtual da UNIFEB. Para melhor atende-lo, gostaria que me informasse algumas informações, como seu nome, RA, e-mail e telefone. Podemos começar?"
+
+  utter_limited_actions:
+  - text: "Sem seus dados talvez não consiga te ajudar da forma como gostaria. No entanto, vamos tentar. Em que posso te ajudar?"
+
+  utter_what_can_i_help:
+  - text: "Em que posso te ajudar?"
+
+  utter_boleto:
+  - text: "Para realizar o pagamento do seu boleto realize o download dele em: http://savethesounds.info/. Você pode ver um vídeo tutorial de como realizar esta ação aqui: https://www.youtube.com/watch?v=OgO2U4quFDk. Caso deseja outras opções relacionadas à boleto, entre em contato com nosso setor financeiro"
+
+  utter_diploma:
+  - text: "Você pode realizar o download do seu diploma em: https://arkadia.xyz/. Para orientações acerca de como realizar este procedimento, verifique nosso vídeo tutorial: https://www.youtube.com/watch?v=Mwx3RvDWvDM. Para saber mais, entre em contato com nossa secretaria academica"
+
+  utter_ask_nome:
+  - text: "Para começar, preciso saber qual é o seu nome completo."
+
+  utter_ask_ra:
+  - text: "E o seu RA?"
+
+  utter_ask_have_email:
+  - text: "Você já sabe o seu e-mail institucional?"
+    buttons:
+      - title: "Sim"
+        payload: '/inform{"have_email": "Sim"}'
+      - title: "Não"
+        payload: '/inform{"have_email":"Não"}'
+
+  utter_ask_email:
+  - text: "Poderia nos informar também o seu e-mail (preferencialmente o institucional (@sou.unifeb.edu.br))"
+
+  utter_ask_telefone:
+  - text: "Por ultimo, gostaríamos que nos informasse também o seu telefone."
+
+
+
+  utter_slots_values:
+  - text: "Ok, para confirmar, seus dados são: \n
+            - Nome: {nome}\n
+            - RA: {ra}\n
+            - Possui e-mail institucional?: {have_email}\n
+            - E-mail: {email}\n
+            - Telefone? {telefone}"
+
+  utter_no_worries:
+  - text: "No problem :)"
+
+  utter_ask_continue:
+  - text: "Desculpe, não entendi. Gostaria de continuar?"
+
+forms: 
+  - aluno_form
+
 
 session_config:
   session_expiration_time: 60

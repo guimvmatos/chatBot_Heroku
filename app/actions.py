@@ -1,27 +1,53 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-#
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/core/actions/#custom-actions/
+from typing import Any, Text, Dict, List, Union
 
+from requests.exceptions import RequestException
+from requests.models import Response
 
-# This is a simple example for a custom action which utters "Hello World!"
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.forms import FormAction
 
-# from typing import Any, Text, Dict, List
-#
-# from rasa_sdk import Action, Tracker
-# from rasa_sdk.executor import CollectingDispatcher
-#
-#
-# class ActionHelloWorld(Action):
-#
-#     def name(self) -> Text:
-#         return "action_hello_world"
-#
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#
-#         dispatcher.utter_message(text="Hello World!")
-#
-#         return []
+class HealthForm(FormAction):
+
+    def name(self):
+        return "aluno_form"
+    
+    @staticmethod
+    def required_slots(tracker):
+
+        return ["nome", "ra", "have_email", "email","telefone"]
+       
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return {
+            "nome": [
+                self.from_text(intent="inform"),
+                self.from_entity(entity="nome"),
+            ],
+            "ra": [
+                self.from_text(intent="inform"),
+                self.from_entity(entity="ra"),
+            ],
+            "have_email":[
+                self.from_entity(entity="have_email"),
+                self.from_intent(intent="affirm",value=True),
+                self.from_intent(intent="deny",value= False),
+            ],
+            "email": [
+                self.from_text(intent="inform"),
+                self.from_entity(entity="email"),
+            ],
+            "telefone": [
+                self.from_text(intent="inform"),
+                self.from_entity(entity="telefone"),
+            ]
+        }
+
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+
+        dispatcher.utter_message("Obrigado pelas informações")
+        return []
